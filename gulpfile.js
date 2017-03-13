@@ -6,6 +6,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var utilities = require('gulp-util');
 var del = require('del');
+var jshint = require('gulp-jshint');
 
 var buildProduction = utilities.env.production;
 
@@ -39,5 +40,12 @@ gulp.task("build", ['clean'], function(){
 });
 
 gulp.task("clean", function() {
+  //delete the entire build and tmp folders. how do we delete a file at a time?
   return del(['build', 'tmp']);
+});
+
+gulp.task('jshint', function(){
+  return gulp.src(['js/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
