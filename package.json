@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "bower-files": "^3.14.1",
     "browserify": "^14.1.0",
     "del": "^2.2.2",
     "gulp": "^3.9.1",

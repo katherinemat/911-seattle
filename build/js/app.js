@@ -82,4 +82,8 @@ $(document).ready(function() {
   });
 });
 
+$(document).ready(function(){
+  $('#time').text(moment());
+});
+
 },{"./../js/pingpong.js":1}]},{},[2]);
