@@ -21,6 +21,8 @@ var lib = require('bower-files')({
   }
 });
 
+var browserSync = require('browser-sync').create();
+
 var buildProduction = utilities.env.production;
 
 // (nameOfTask to call later, function to run when we tell gulp to run task)
@@ -80,4 +82,27 @@ gulp.task('jshint', function(){
   return gulp.src(['js/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+});
+
+gulp.task('serve', function() {
+  browserSync.init({
+    server: {
+      //starting point is in home directory and the starting place for the app is index.html
+      baseDir: "./",
+      index: "index.html"
+    }
+  });
+  //this method watches for any changes to .js files or bower dependencies. if change, run jsBuild task
+  gulp.watch(['js/*.js'], ['jsBuild']);
+  gulp.watch(['bower.json'], ['bowerBuild']);
+});
+
+//Write tasks per "watches" from bower sync  serve task (above)
+//lists array of dependency tasks that need to be run whenever a .js file changes
+gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function () {
+  browserSync.reload();
+});
+
+gulp.task('bowerBuild', ['bower'], function() {
+  bowerSync.reload();
 });
