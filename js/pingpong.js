@@ -18,23 +18,25 @@ Calculator.prototype.pingPong = function(goal) {
   return output;
 };
 
-Calculator.prototype.calculate = function (firstNum, secondNum) {
-  if (".math-symbol" === add)
+Calculator.prototype.calculate = function (firstNum, symbol, secondNum) {
+  var result = 0;
+  if (symbol === "add")
   {
-    return firstNum + secondNum;
+    result = firstNum + secondNum;
   }
-  else if (".math-symbol" === subtract)
+  else if (symbol === "subtract")
   {
-    return firstNum - secondNum;
+    result = firstNum - secondNum;
   }
-  else if (".math-symbol" === multiply)
+  else if (symbol === "multiply")
   {
-    return firstNum - secondNum;
+    result = firstNum * secondNum;
   }
   else
   {
-    return firstNum / secondNum;
+    result = firstNum / secondNum;
   }
-}
+  return result;
+};
 
 exports.calculatorModule = Calculator;
