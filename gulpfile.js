@@ -45,6 +45,7 @@ gulp.task('bowerCSS', function(){
     .pipe(gulp.dest('./build/css'));
 });
 
+
 gulp.task('jsBrowserify', ['concatInterface'], function() {
   return browserify({ entries: ['./tmp/allConcat.js'] })
     .bundle()
@@ -84,6 +85,8 @@ gulp.task('jshint', function(){
     .pipe(jshint.reporter('default'));
 });
 
+
+
 gulp.task('serve', function() {
   browserSync.init({
     server: {
@@ -95,8 +98,12 @@ gulp.task('serve', function() {
   //this method watches for any changes to .js files or bower dependencies. if change, run jsBuild task
   gulp.watch(['js/*.js'], ['jsBuild']);
   gulp.watch(['bower.json'], ['bowerBuild']);
+  gulp.watch(['*.html'], ['htmlBuild']);
 });
 
+gulp.task('htmlBuild', function() {
+  browserSync.reload();
+});
 //Write tasks per "watches" from bower sync  serve task (above)
 //lists array of dependency tasks that need to be run whenever a .js file changes
 gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function () {
