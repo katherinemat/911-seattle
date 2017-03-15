@@ -11,15 +11,25 @@
 
 <body>
   <div class="search">
-    <h1>What type of crime?</h1>
-    <label for="crime">Enter here:</label>
-    <input name="crime" id="crime" type="text">
-    <button class="btn-success" id="getCrimes">Get 911 Calls!</button>
-    <div id="showCrimes"></div>
+    <div class="form-group">
+      <label for="crime">Choose a kind of crime</label>
+      <select required class="form-control" id="crime">
+        <option value="" disabled selected></option>
+        <option>MOTOR VEHICLE COLLISION</option>
+        <option>HARASSMENT, THREATS</option>
+        <option>THEFT - CAR PROWL</option>
+        <option>FIGHT DISTURBANCE</option>
+        <option>PARKING VIOLATION (EXCEPT ABANDONED VEHICLES)</option>
+        <option>TRESPASS</option>
+        <option>BURGLARY - RESIDENTIAL, UNOCCUPIED</option>
+        <option>LIQUOR VIOLATION - ADULT</option>
+      </select>
+      <button class="btn-success" id="getCrimes">Get 911 Calls!</button>
+    </div>
   </div>
   <h3>My Google Maps Demo</h3>
   <div id="map"></div>
-  
+
 </body>
 
 

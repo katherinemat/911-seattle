@@ -4,8 +4,8 @@ var Map = require('./../js/map.js').mapModule;
 Crime = function(){
 };
 
-Crime.prototype.getCrime = function(displayFunction) {
-  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=S&$$app_token=' + apiKey)
+Crime.prototype.getCrime = function(crimeType, displayFunction) {
+  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?event_clearance_description=' + crimeType + '&$$app_token=' + apiKey)
   .then(function(response) {
 
     currentMapObject = new Map(47.612988, -122.333540);

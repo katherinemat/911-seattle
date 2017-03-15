@@ -8,9 +8,9 @@ var displayCrime = function(crimeData) {
 $(document).ready(function() {
   var currentCrimeObject = new Crime();
   $('#getCrimes').click(function() {
-    var type = $('#crime').val();
+    var type = $("#crime option:selected").text();
     $('#crime').val("");
-    currentCrimeObject.getCrime(displayCrime);
+    currentCrimeObject.getCrime(type, displayCrime);
   });
 });
 

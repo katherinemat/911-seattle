@@ -8,8 +8,8 @@ var Map = require('./../js/map.js').mapModule;
 Crime = function(){
 };
 
-Crime.prototype.getCrime = function(displayFunction) {
-  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=S&$$app_token=' + apiKey)
+Crime.prototype.getCrime = function(crimeType, displayFunction) {
+  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?event_clearance_description=' + crimeType + '&$$app_token=' + apiKey)
   .then(function(response) {
 
     currentMapObject = new Map(47.612988, -122.333540);
@@ -68,9 +68,9 @@ var displayCrime = function(crimeData) {
 $(document).ready(function() {
   var currentCrimeObject = new Crime();
   $('#getCrimes').click(function() {
-    var type = $('#crime').val();
+    var type = $("#crime option:selected").text();
     $('#crime').val("");
-    currentCrimeObject.getCrime(displayCrime);
+    currentCrimeObject.getCrime(type, displayCrime);
   });
 });
 
