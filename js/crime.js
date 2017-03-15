@@ -11,13 +11,8 @@ Crime.prototype.getCrime = function(displayFunction) {
     currentMapObject = new Map(47.612988, -122.333540);
 
     for(var i = 0; i < 20; i++) {
-      //latitude
       var latitude = response[i].incident_location.coordinates[1];
-      console.log(latitude);
-
-      //longitude
       var longitude = response[i].incident_location.coordinates[0];
-      console.log(longitude);
       currentMapObject.placeMarker(latitude, longitude);
     }
   })

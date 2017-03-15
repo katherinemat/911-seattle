@@ -7,12 +7,22 @@ Map = function(latitude, longitude){
 };
 
 Map.prototype.placeMarker = function(latitude, longitude){
-  // Loop through the results array and place a marker for each
-  // set of coordinates.
+
   var crimeSpot = {lat: latitude, lng: longitude};
   var marker = new google.maps.Marker({
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      strokeColor: '#FF0000',
+      scale: 3,
+      strokeWeight: 8,
+      fillColor: '#FF0000'
+    },
     position: crimeSpot,
     map: this.map
   });
 };
-exports.mapModule = Map;
+
+// Map.prototype.setStyle(function(feature) {
+  //
+  // });
+  exports.mapModule = Map;

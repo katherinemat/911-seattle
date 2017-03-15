@@ -15,13 +15,8 @@ Crime.prototype.getCrime = function(displayFunction) {
     currentMapObject = new Map(47.612988, -122.333540);
 
     for(var i = 0; i < 20; i++) {
-      //latitude
       var latitude = response[i].incident_location.coordinates[1];
-      console.log(latitude);
-
-      //longitude
       var longitude = response[i].incident_location.coordinates[0];
-      console.log(longitude);
       currentMapObject.placeMarker(latitude, longitude);
     }
   })
@@ -42,15 +37,25 @@ Map = function(latitude, longitude){
 };
 
 Map.prototype.placeMarker = function(latitude, longitude){
-  // Loop through the results array and place a marker for each
-  // set of coordinates.
+
   var crimeSpot = {lat: latitude, lng: longitude};
   var marker = new google.maps.Marker({
+    icon: {
+      path: google.maps.SymbolPath.CIRCLE,
+      strokeColor: '#FF0000',
+      scale: 3,
+      strokeWeight: 8,
+      fillColor: '#FF0000'
+    },
     position: crimeSpot,
     map: this.map
   });
 };
-exports.mapModule = Map;
+
+// Map.prototype.setStyle(function(feature) {
+  //
+  // });
+  exports.mapModule = Map;
 
 },{}],4:[function(require,module,exports){
 //ask about file routes. is single period a traverse?
