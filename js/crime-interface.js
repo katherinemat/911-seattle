@@ -3,7 +3,7 @@ var Crime = require('./../js/crime.js').crimeModule;
 
 var displayCrime = function(crimeData) {
   $('#showCrimes').text("The crime is " + crimeData + ".");
-}
+};
 
 $(document).ready(function() {
   var currentCrimeObject = new Crime();

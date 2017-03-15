@@ -5,17 +5,17 @@ exports.apiKey = "qbXrBHvXdcS4WPRooTF9fk1he";
 var apiKey = require('./../.env').apiKey;
 
 Crime = function(){
-}
+};
 
 Crime.prototype.getCrime = function(displayFunction) {
-  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=N')
+  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=S&$$app_token=' + apiKey)
   .then(function(response) {
-    console.log(response);
+    displayFunction(response[0].event_clearance_description);
   })
   .fail(function(error) {
     $('#showCrimes').text(error.responseJSON.message);
   });
-}
+};
 
 exports.crimeModule = Crime;
 
@@ -25,7 +25,7 @@ var Crime = require('./../js/crime.js').crimeModule;
 
 var displayCrime = function(crimeData) {
   $('#showCrimes').text("The crime is " + crimeData + ".");
-}
+};
 
 $(document).ready(function() {
   var currentCrimeObject = new Crime();
