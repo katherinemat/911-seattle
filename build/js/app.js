@@ -1,124 +1,39 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-exports.apiKey = "b833217ac5215c374887bb90f72eb20b";
+exports.apiKey = "qbXrBHvXdcS4WPRooTF9fk1he";
 
 },{}],2:[function(require,module,exports){
-function Calculator(skinName) {
-  this.skin = skinName;
-}
-
-Calculator.prototype.pingPong = function(goal) {
-  var output = [];
-  for (var i = 1; i <= goal; i++) {
-    if (i % 15 === 0) {
-      output.push("ping-pong");
-    } else if (i % 3 === 0) {
-      output.push("ping");
-    } else if (i % 5 === 0) {
-      output.push("pong");
-    } else  {
-      output.push(i);
-    }
-  }
-  return output;
-};
-
-Calculator.prototype.calculate = function (firstNum, symbol, secondNum) {
-  var result = 0;
-  if (symbol === "add")
-  {
-    result = firstNum + secondNum;
-  }
-  else if (symbol === "subtract")
-  {
-    result = firstNum - secondNum;
-  }
-  else if (symbol === "multiply")
-  {
-    result = firstNum * secondNum;
-  }
-  else
-  {
-    result = firstNum / secondNum;
-  }
-  return result;
-};
-
-exports.calculatorModule = Calculator;
-
-},{}],3:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
 
-Weather = function(){
+Crime = function(){
 }
 
-Weather.prototype.getWeather = function(city, displayFunction) {
-  $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey).then(function(response) {
-    displayFunction(city, response.main.humidity);
-  }).fail(function(error) {
-    $('.showWeather').text(error.responseJSON.message);
+Crime.prototype.getCrime = function(displayFunction) {
+  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=N')
+  .then(function(response) {
+    console.log(response);
+  })
+  .fail(function(error) {
+    $('#showCrimes').text(error.responseJSON.message);
   });
 }
 
-exports.weatherModule = Weather;
+exports.crimeModule = Crime;
 
-},{"./../.env":1}],4:[function(require,module,exports){
-var Calculator = require ('./../js/pingpong.js').calculatorModule;
-
-$(document).ready(function() {
-  var simpleCalculator2 = new Calculator("camo");
-  $('.calculate').submit(function(event) {
-    event.preventDefault();
-    var firstInput = parseInt($("#first-number").val());
-    var symbol = $('input[name="math-symbol"]:checked').val();
-    var secondInput = parseInt($("#second-number").val());
-    var calculation = simpleCalculator2.calculate(firstInput, symbol, secondInput);
-    $("#math-result").text(calculation);
-  });
-});
-
-var Calculator = require ('./../js/pingpong.js').calculatorModule;
-
-$(document).ready(function() {
-  var simpleCalculator = new Calculator("camo");
-  $('#ping-pong-form').submit(function(event) {
-    event.preventDefault();
-    var goal = $('#goal').val();
-    var output = simpleCalculator.pingPong(goal);
-    output.forEach(function(element) {
-      $('#solution').append("<li>" + element + "</li>");
-    });
-  });
-
-
-});
-
-$(document).ready(function() {
-  $('#signup').submit(function(event){
-    event.preventDefault();
-    var email = $('#email').val();
-    $('#signup').hide();
-    $('#solution').prepend('<p>Thank you, ' + email + ' has been added to our list!</p>');
-  });
-});
-
-$(document).ready(function(){
-  $('#time').text(moment());
-});
-
+},{"./../.env":1}],3:[function(require,module,exports){
 //ask about file routes. is single period a traverse?
-var Weather = require('./../js/weather.js').weatherModule;
+var Crime = require('./../js/crime.js').crimeModule;
 
-var displayHumidity = function(city, humidityData) {
-  $('.showWeather').text("The humidity in " + city + " is " + humidityData + "%");
+var displayCrime = function(crimeData) {
+  $('#showCrimes').text("The crime is " + crimeData + ".");
 }
 
 $(document).ready(function() {
-  var currentWeatherObject = new Weather();
-  $('#weatherLocation').click(function() {
-    var city = $('#location').val();
-    $('#location').val("");
-    currentWeatherObject.getWeather(city, displayHumidity);
+  var currentCrimeObject = new Crime();
+  $('#getCrimes').click(function() {
+    var type = $('#crime').val();
+    $('#crime').val("");
+    currentCrimeObject.getCrime(displayCrime);
   });
 });
 
-},{"./../js/pingpong.js":2,"./../js/weather.js":3}]},{},[4]);
+},{"./../js/crime.js":2}]},{},[3]);

@@ -1,51 +1,21 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="build/css/vendor.css">
-    <script src="build/js/vendor.min.js"></script>
-    <script type="text/javascript" src="build/js/app.js"></script>
-    <title>Ping Pong</title>
-  </head>
-  <body>
-    <h1>Several Random Things</h1>
-    <form id="ping-pong-form">
-      <label for="goal">Enter a number for Ping-Pong:</label>
-      <input id="goal" type="number">
-      <button type="submit">Submit</button>
-    </form>
-    <br> <br>
-    <hr>
-    <br> <br>
-    <h1>Here is an arithmetic calculator</h1>
-    <form class="calculate">
-      <label for="first-number">Enter a number</label>
-      <input type="number" id="first-number" name="first-number"> <br>
-      <input type="radio" id="add-symbol" name="math-symbol" value="add"> + <br>
-      <input type="radio" id="subtract-symbol" name="math-symbol" value="subtract"> - <br>
-      <input type="radio" id="multiply-symbol" name="math-symbol" value="multiply"> * <br>
-      <input type="radio" id="divide-symbol" name="math-symbol" value="divide"> / <br>
-      <label for="second-number">Enter another number</label>
-      <input type="number" id="second-number" name="second-number">
-      <button type="submit"> Calculate! </button>
-    </form>
-    <p id="math-result">the answer should be here.
-    </p>
-    <br> <br>
-    <hr>
-    <br> <br>
+<head>
+  <link rel="stylesheet" href="build/css/vendor.css">
+  <script src="build/js/vendor.min.js"></script>
+  <script type="text/javascript" src="build/js/app.js"></script>
+  <title>911 Seattle</title>
+</head>
 
-    <form id="signup">
-      <label for="email">Enter your email:</label>
-      <input id="email" type="text">
-      <button type="submit">Submit</button>
-    </form>
-    <ul id="solution"></ul>
+<body>
+  <div class="container">
+    <h1>What type of crime?</h1>
+    <label for="crime">Enter here:</label>
+    <input name="crime" id="crime" type="text">
+    <button class="btn-success" id="getCrimes">Get 911 Calls!</button>
+    <div id="showCrimes"></div>
+  </div>
+</body>
 
-    <h3>Well look at the time</h3>
-    <h3 id="time"></h3>
 
-    <a href="weather.html">Click for the weather...</a>
-    
-
-  </body>
 </html>
