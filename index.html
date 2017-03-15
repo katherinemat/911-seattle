@@ -2,19 +2,24 @@
 <html>
 <head>
   <link rel="stylesheet" href="build/css/vendor.css">
+  <link rel="stylesheet" href="build/css/styles.css">
   <script src="build/js/vendor.min.js"></script>
   <script type="text/javascript" src="build/js/app.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYHE_eB1vpFRnsj1kqvEtTP87whcv8Pow"></script>
   <title>911 Seattle</title>
 </head>
 
 <body>
-  <div class="container">
+  <div class="search">
     <h1>What type of crime?</h1>
     <label for="crime">Enter here:</label>
     <input name="crime" id="crime" type="text">
     <button class="btn-success" id="getCrimes">Get 911 Calls!</button>
     <div id="showCrimes"></div>
   </div>
+  <h3>My Google Maps Demo</h3>
+  <div id="map"></div>
+  
 </body>
 
 

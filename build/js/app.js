@@ -11,8 +11,10 @@ Crime.prototype.getCrime = function(displayFunction) {
   $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=S&$$app_token=' + apiKey)
   .then(function(response) {
     for(var i = 0; i < 20; i++) {
-      console.log(response[i].incident_location.coordinates[0]);
+      //latitude
       console.log(response[i].incident_location.coordinates[1]);
+      //longitude
+      console.log(response[i].incident_location.coordinates[0]);
     }
   })
   .fail(function(error) {
@@ -23,6 +25,26 @@ Crime.prototype.getCrime = function(displayFunction) {
 exports.crimeModule = Crime;
 
 },{"./../.env":1}],3:[function(require,module,exports){
+
+Map = function(){
+
+};
+
+Map.prototype.initMap = function(){
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+
+      exports.mapModule = Map;
+
+},{}],4:[function(require,module,exports){
 //ask about file routes. is single period a traverse?
 var Crime = require('./../js/crime.js').crimeModule;
 
@@ -39,4 +61,17 @@ $(document).ready(function() {
   });
 });
 
-},{"./../js/crime.js":2}]},{},[3]);
+var Map = require('./../js/map.js').mapModule;
+
+var displayMap = function(mapData) {
+  $('#map').text(mapData);
+};
+
+$(document).ready(function() {
+  var currentMapObject = new Map();
+  $('#getCrimes').click(function() {
+    currentMapObject.initMap(displayMap);
+  });
+});
+
+},{"./../js/crime.js":2,"./../js/map.js":3}]},{},[4]);
