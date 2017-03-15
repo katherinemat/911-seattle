@@ -3,6 +3,7 @@ exports.apiKey = "qbXrBHvXdcS4WPRooTF9fk1he";
 
 },{}],2:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
+var Map = require('./../js/map.js').mapModule;
 
 Crime = function(){
 };
@@ -10,11 +11,18 @@ Crime = function(){
 Crime.prototype.getCrime = function(displayFunction) {
   $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=S&$$app_token=' + apiKey)
   .then(function(response) {
+
+    currentMapObject = new Map(47.612988, -122.333540);
+
     for(var i = 0; i < 20; i++) {
       //latitude
-      console.log(response[i].incident_location.coordinates[1]);
+      var latitude = response[i].incident_location.coordinates[1];
+      console.log(latitude);
+
       //longitude
-      console.log(response[i].incident_location.coordinates[0]);
+      var longitude = response[i].incident_location.coordinates[0];
+      console.log(longitude);
+      currentMapObject.placeMarker(latitude, longitude);
     }
   })
   .fail(function(error) {
@@ -24,25 +32,25 @@ Crime.prototype.getCrime = function(displayFunction) {
 
 exports.crimeModule = Crime;
 
-},{"./../.env":1}],3:[function(require,module,exports){
-
-Map = function(){
-
+},{"./../.env":1,"./../js/map.js":3}],3:[function(require,module,exports){
+Map = function(latitude, longitude){
+  this.centerSpot = {lat: latitude, lng: longitude};
+  this.map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: this.centerSpot
+  });
 };
 
-Map.prototype.initMap = function(){
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-
-      exports.mapModule = Map;
+Map.prototype.placeMarker = function(latitude, longitude){
+  // Loop through the results array and place a marker for each
+  // set of coordinates.
+  var crimeSpot = {lat: latitude, lng: longitude};
+  var marker = new google.maps.Marker({
+    position: crimeSpot,
+    map: this.map
+  });
+};
+exports.mapModule = Map;
 
 },{}],4:[function(require,module,exports){
 //ask about file routes. is single period a traverse?

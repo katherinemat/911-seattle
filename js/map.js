@@ -1,18 +1,18 @@
-
-Map = function(){
-
+Map = function(latitude, longitude){
+  this.centerSpot = {lat: latitude, lng: longitude};
+  this.map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: this.centerSpot
+  });
 };
 
-Map.prototype.initMap = function(){
-        var uluru = {lat: -25.363, lng: 131.044};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-
-      exports.mapModule = Map;
+Map.prototype.placeMarker = function(latitude, longitude){
+  // Loop through the results array and place a marker for each
+  // set of coordinates.
+  var crimeSpot = {lat: latitude, lng: longitude};
+  var marker = new google.maps.Marker({
+    position: crimeSpot,
+    map: this.map
+  });
+};
+exports.mapModule = Map;
