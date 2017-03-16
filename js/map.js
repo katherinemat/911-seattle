@@ -7,7 +7,6 @@ Map = function(latitude, longitude){
 };
 
 Map.prototype.placeMarker = function(latitude, longitude){
-
   var crimeSpot = {lat: latitude, lng: longitude};
   var marker = new google.maps.Marker({
     icon: {
@@ -22,7 +21,4 @@ Map.prototype.placeMarker = function(latitude, longitude){
   });
 };
 
-// Map.prototype.setStyle(function(feature) {
-  //
-  // });
-  exports.mapModule = Map;
+exports.mapModule = Map;

@@ -6,7 +6,7 @@
   <script src="build/js/vendor.min.js"></script>
   <script type="text/javascript" src="build/js/app.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYHE_eB1vpFRnsj1kqvEtTP87whcv8Pow"></script>
-  <!-- <script type="text/javascript" src="canvasjs.min.js"></script> -->
+  <script type="text/javascript" src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <title>911 Seattle</title>
 </head>
 
@@ -57,10 +57,18 @@
       <label for="second-date">And</label>
       <input type="date" name="second-date" id="second-date">
     </div>
-    <button class="btn-success" id="getCrimes">Get 911 Calls!</button>
+    <button class="btn-success" id="get-crimes">Get 911 Calls!</button>
   </div>
-  <h3>My Google Maps Demo</h3>
-  <div id="map"></div>
+  <div class="row">
+    <div class="col-md-8">
+      <h3>My Google Maps Demo</h3>
+      <div id="map"></div>
+    </div>
+    <div class="col-md-4">
+      <h3>My Google Maps Demo</h3>
+      <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    </div>
+  </div>
 
 </body>
 

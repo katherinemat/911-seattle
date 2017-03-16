@@ -14,10 +14,10 @@ Crime.prototype.getCrime = function(firstDate, secondDate, crimeType, crimeDistr
   if(crimeDistrict !== "") {
     query = query + "&district_sector=" + crimeDistrict;
   }
-
   if(firstDate !== "" && secondDate !== ""){
     query = query + '&$where=event_clearance_date between "' + firstDate + '" and "' + secondDate + '"';
   }
+  
   $.get(query + '&$$app_token=' + apiKey).then(function(response) {
     currentMapObject = new Map(47.612988, -122.333540);
     for(var i = 0; i < response.length; i++) {

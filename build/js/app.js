@@ -2,6 +2,34 @@
 exports.apiKey = "qbXrBHvXdcS4WPRooTF9fk1he";
 
 },{}],2:[function(require,module,exports){
+Chart = function(){
+};
+
+Chart.prototype.getChart = function() {
+  var chart = new CanvasJS.Chart("chartContainer", {
+    title:{
+      text: "My First Chart in CanvasJS"
+    },
+    data: [
+    {
+      // Change type to "doughnut", "line", "splineArea", etc.
+      type: "column",
+      dataPoints: [
+        { label: "apple",  y: 10  },
+        { label: "orange", y: 15  },
+        { label: "banana", y: 25  },
+        { label: "mango",  y: 30  },
+        { label: "grape",  y: 28  }
+      ]
+    }
+    ]
+  });
+  chart.render();
+};
+
+exports.chartModule = Chart;
+
+},{}],3:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
 var Map = require('./../js/map.js').mapModule;
 
@@ -18,10 +46,10 @@ Crime.prototype.getCrime = function(firstDate, secondDate, crimeType, crimeDistr
   if(crimeDistrict !== "") {
     query = query + "&district_sector=" + crimeDistrict;
   }
-
   if(firstDate !== "" && secondDate !== ""){
     query = query + '&$where=event_clearance_date between "' + firstDate + '" and "' + secondDate + '"';
   }
+  
   $.get(query + '&$$app_token=' + apiKey).then(function(response) {
     currentMapObject = new Map(47.612988, -122.333540);
     for(var i = 0; i < response.length; i++) {
@@ -38,7 +66,7 @@ Crime.prototype.getCrime = function(firstDate, secondDate, crimeType, crimeDistr
 
 exports.crimeModule = Crime;
 
-},{"./../.env":1,"./../js/map.js":3}],3:[function(require,module,exports){
+},{"./../.env":1,"./../js/map.js":4}],4:[function(require,module,exports){
 Map = function(latitude, longitude){
   this.centerSpot = {lat: latitude, lng: longitude};
   this.map = new google.maps.Map(document.getElementById('map'), {
@@ -48,7 +76,6 @@ Map = function(latitude, longitude){
 };
 
 Map.prototype.placeMarker = function(latitude, longitude){
-
   var crimeSpot = {lat: latitude, lng: longitude};
   var marker = new google.maps.Marker({
     icon: {
@@ -63,22 +90,29 @@ Map.prototype.placeMarker = function(latitude, longitude){
   });
 };
 
-// Map.prototype.setStyle(function(feature) {
-  //
-  // });
-  exports.mapModule = Map;
+exports.mapModule = Map;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+var Chart = require('./../js/chart.js').chartModule;
+
+$(document).ready(function() {
+  $('#get-crimes').click(function() {
+    console.log("hey");
+    var currentChartObject = new Chart();
+    currentChartObject.getChart();
+    var type = $("#crime option:selected").text();
+    var district = $('#district option:selected').text();
+    var firstDate = $("#first-date").val();
+    var secondDate = $("#second-date").val();
+  });
+});
+
 //ask about file routes. is single period a traverse?
 var Crime = require('./../js/crime.js').crimeModule;
 
-// var displayCrime = function(crimeData) {
-//   $('#showCrimes').append("<p> The crime is" + crimeData + ". </p>");
-// };
-
 $(document).ready(function() {
   var currentCrimeObject = new Crime();
-  $('#getCrimes').click(function() {
+  $('#get-crimes').click(function() {
     var type = $("#crime option:selected").text();
     var district = $('#district option:selected').text();
     var firstDate = $("#first-date").val();
@@ -97,4 +131,4 @@ $(document).ready(function() {
 //   });
 // });
 
-},{"./../js/crime.js":2}]},{},[4]);
+},{"./../js/chart.js":2,"./../js/crime.js":3}]},{},[5]);
