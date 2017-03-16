@@ -12,7 +12,9 @@ $(document).ready(function() {
     var district = $('#district option:selected').text();
     var firstDate = $("#first-date").val();
     var secondDate = $("#second-date").val();
-    currentCrimeObject.getCrime(type, district);
+    console.log(firstDate);
+    console.log(secondDate);
+    currentCrimeObject.getCrime(firstDate, secondDate, type, district);
   });
 });
 
