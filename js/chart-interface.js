@@ -1,7 +1,7 @@
 var Chart = require('./../js/chart.js').chartModule;
 
 $(document).ready(function() {
-  $('#get-crimes').click(function() {
+  $('#get-chart').click(function() {
     console.log("hey");
     var currentChartObject = new Chart();
     currentChartObject.getChart();

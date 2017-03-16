@@ -4,18 +4,21 @@ Chart = function(){
 Chart.prototype.getChart = function() {
   var chart = new CanvasJS.Chart("chartContainer", {
     title:{
-      text: "My First Chart in CanvasJS"
+      text: "911 data"
     },
     data: [
     {
       // Change type to "doughnut", "line", "splineArea", etc.
       type: "column",
       dataPoints: [
-        { label: "apple",  y: 10  },
-        { label: "orange", y: 15  },
-        { label: "banana", y: 25  },
-        { label: "mango",  y: 30  },
-        { label: "grape",  y: 28  }
+        { label: "MVC",  y: 10  },
+        { label: "HARASSMENT", y: 15  },
+        { label: "CAR THEFT", y: 25  },
+        { label: "FIGHT",  y: 30  },
+        { label: "PARKING",  y: 28  },
+        { label: "TRESPASS",  y: 28  },
+        { label: "BURGLARY",  y: 28  },
+        { label: "LIQUOR",  y: 28  }
       ]
     }
     ]
