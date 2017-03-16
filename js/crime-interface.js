@@ -1,9 +1,9 @@
 //ask about file routes. is single period a traverse?
 var Crime = require('./../js/crime.js').crimeModule;
 
-var displayCrime = function(crimeData) {
-  $('#showCrimes').append("<p> The crime is" + crimeData + ". </p>");
-};
+// var displayCrime = function(crimeData) {
+//   $('#showCrimes').append("<p> The crime is" + crimeData + ". </p>");
+// };
 
 $(document).ready(function() {
   var currentCrimeObject = new Crime();
@@ -12,6 +12,6 @@ $(document).ready(function() {
     var district = $('#district option:selected').text();
     var firstDate = $("#first-date").val();
     var secondDate = $("#second-date").val();
-    currentCrimeObject.getCrime(firstDate, secondDate, displayCrime);
+    currentCrimeObject.getCrime(type, district);
   });
 });

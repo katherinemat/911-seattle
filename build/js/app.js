@@ -8,10 +8,25 @@ var Map = require('./../js/map.js').mapModule;
 Crime = function(){
 };
 
-Crime.prototype.getCrime = function(firstDate, secondDate, displayFunction) {
-  // $.get('https://data.seattle.gov/resource/pu5n-trf4.json?event_clearance_description=' + crimeType + '&$$app_token=' + apiKey)
-  // $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=' + crimeDistrict + '&$$app_token='+ apiKey)
-  $.get("https://data.seattle.gov/resource/pu5n-trf4.json?$where=event_clearance_date between '" + firstDate + "' and '" + secondDate + "' &$$app_token="+ apiKey)
+Crime.prototype.getCrime = function(crimeType, crimeDistrict) {
+  // var query = "https://data.seattle.gov/resource/pu5n-trf4.json?";
+  // var queryNumber = 0;
+  // if(crimeType !== "") {
+  //   queryNumber++;
+  //   if (queryNumber > 1) {
+  //     query = query + "AND event_clearance_description=" + crimeType;
+  //   } else {
+  //     query = query + "event_clearance_description=" + crimeType;
+  //   }
+  // }
+  // if(crimeDistrict !== "") {
+  //   queryNumber++;
+  //   query = query + "district_sector=" + crimeDistrict;
+  // }
+  //
+  // $.get(query + '&$$app_token=' + apiKey)
+  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=B&&event_clearance_description=MOTOR VEHICLE COLLISION' + '&$$app_token='+ apiKey)
+  // $.get("https://data.seattle.gov/resource/pu5n-trf4.json?$where=event_clearance_date between '" + firstDate + "' and '" + secondDate + "' &$$app_token="+ apiKey)
   .then(function(response) {
     currentMapObject = new Map(47.612988, -122.333540);
 
@@ -63,9 +78,9 @@ Map.prototype.placeMarker = function(latitude, longitude){
 //ask about file routes. is single period a traverse?
 var Crime = require('./../js/crime.js').crimeModule;
 
-var displayCrime = function(crimeData) {
-  $('#showCrimes').append("<p> The crime is" + crimeData + ". </p>");
-};
+// var displayCrime = function(crimeData) {
+//   $('#showCrimes').append("<p> The crime is" + crimeData + ". </p>");
+// };
 
 $(document).ready(function() {
   var currentCrimeObject = new Crime();
@@ -74,7 +89,7 @@ $(document).ready(function() {
     var district = $('#district option:selected').text();
     var firstDate = $("#first-date").val();
     var secondDate = $("#second-date").val();
-    currentCrimeObject.getCrime(firstDate, secondDate, displayCrime);
+    currentCrimeObject.getCrime(type, district);
   });
 });
 
