@@ -5,23 +5,27 @@ Crime = function(){
 };
 
 Crime.prototype.getCrime = function(crimeType, crimeDistrict) {
-  // var query = "https://data.seattle.gov/resource/pu5n-trf4.json?";
-  // var queryNumber = 0;
-  // if(crimeType !== "") {
-  //   queryNumber++;
-  //   if (queryNumber > 1) {
-  //     query = query + "AND event_clearance_description=" + crimeType;
-  //   } else {
-  //     query = query + "event_clearance_description=" + crimeType;
-  //   }
-  // }
-  // if(crimeDistrict !== "") {
-  //   queryNumber++;
-  //   query = query + "district_sector=" + crimeDistrict;
-  // }
-  //
-  // $.get(query + '&$$app_token=' + apiKey)
-  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=B&&event_clearance_description=MOTOR VEHICLE COLLISION' + '&$$app_token='+ apiKey)
+  var query = "https://data.seattle.gov/resource/pu5n-trf4.json?";
+  var queryNumber = 0;
+  if(crimeType !== "") {
+    queryNumber++;
+    if (queryNumber > 1) {
+      query = query + "&&event_clearance_description=" + crimeType;
+    } else {
+      query = query + "event_clearance_description=" + crimeType;
+    }
+  }
+  if(crimeDistrict !== "") {
+    queryNumber++;
+    if (queryNumber > 1) {
+      query = query + "&&district_sector=" + crimeDistrict;
+    } else {
+      query = query + "district_sector=" + crimeDistrict;
+    }
+  }
+
+  $.get(query + '&$$app_token=' + apiKey)
+  // $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=B&&event_clearance_description=MOTOR VEHICLE COLLISION' +   '&$$app_token='+ apiKey)
   // $.get("https://data.seattle.gov/resource/pu5n-trf4.json?$where=event_clearance_date between '" + firstDate + "' and '" + secondDate + "' &$$app_token="+ apiKey)
   .then(function(response) {
     currentMapObject = new Map(47.612988, -122.333540);
