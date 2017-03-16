@@ -9,7 +9,9 @@ $(document).ready(function() {
   var currentCrimeObject = new Crime();
   $('#getCrimes').click(function() {
     var type = $("#crime option:selected").text();
-    $('#crime').val("");
-    currentCrimeObject.getCrime(type, displayCrime);
+    var district = $('#district option:selected').text();
+    var firstDate = $("#first-date").val();
+    var secondDate = $("#second-date").val();
+    currentCrimeObject.getCrime(firstDate, secondDate, displayCrime);
   });
 });

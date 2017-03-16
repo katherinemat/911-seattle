@@ -8,13 +8,15 @@ var Map = require('./../js/map.js').mapModule;
 Crime = function(){
 };
 
-Crime.prototype.getCrime = function(crimeType, displayFunction) {
-  $.get('https://data.seattle.gov/resource/pu5n-trf4.json?event_clearance_description=' + crimeType + '&$$app_token=' + apiKey)
+Crime.prototype.getCrime = function(firstDate, secondDate, displayFunction) {
+  // $.get('https://data.seattle.gov/resource/pu5n-trf4.json?event_clearance_description=' + crimeType + '&$$app_token=' + apiKey)
+  // $.get('https://data.seattle.gov/resource/pu5n-trf4.json?district_sector=' + crimeDistrict + '&$$app_token='+ apiKey)
+  $.get("https://data.seattle.gov/resource/pu5n-trf4.json?$where=event_clearance_date between '" + firstDate + "' and '" + secondDate + "' &$$app_token="+ apiKey)
   .then(function(response) {
-
     currentMapObject = new Map(47.612988, -122.333540);
 
     for(var i = 0; i < 50; i++) {
+      // console.log(response[i].event_clearance_date);
       var latitude = response[i].incident_location.coordinates[1];
       var longitude = response[i].incident_location.coordinates[0];
       currentMapObject.placeMarker(latitude, longitude);
@@ -69,22 +71,19 @@ $(document).ready(function() {
   var currentCrimeObject = new Crime();
   $('#getCrimes').click(function() {
     var type = $("#crime option:selected").text();
-    $('#crime').val("");
-    currentCrimeObject.getCrime(type, displayCrime);
+    var district = $('#district option:selected').text();
+    var firstDate = $("#first-date").val();
+    var secondDate = $("#second-date").val();
+    currentCrimeObject.getCrime(firstDate, secondDate, displayCrime);
   });
 });
 
-var Map = require('./../js/map.js').mapModule;
+// var Map = require('./../js/map.js').mapModule;
+//
+// $(document).ready(function() {
+//   $('#getCrimes').click(function() {
+//     var currentMapObject = new Map(47.612988, -122.333540);
+//   });
+// });
 
-var displayMap = function(mapData) {
-  $('#map').text(mapData);
-};
-
-$(document).ready(function() {
-  var currentMapObject = new Map();
-  $('#getCrimes').click(function() {
-    currentMapObject.initMap(displayMap);
-  });
-});
-
-},{"./../js/crime.js":2,"./../js/map.js":3}]},{},[4]);
+},{"./../js/crime.js":2}]},{},[4]);
